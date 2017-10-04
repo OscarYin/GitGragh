@@ -1,0 +1,53 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.css"/>
+</head>
+
+<body>
+    <canvas id="gitGraph"></canvas>
+    <script>
+        var gitgraph = new GitGraph({
+            template: 'metro'
+        });
+        var master = gitgraph.branch('master');
+        var hotfix2 = gitgraph.branch('hotfix2');
+        var hotfix3 = gitgraph.branch('hotfix3');
+        var develop = gitgraph.branch('develop');
+        develop.commit({
+            dotSize: 10,
+            DotStrokeWidth: 10,
+            message: 'feature develop',
+            author: 'Oscar Yin <oscaryin@objectivasoftware.com>'
+        });
+        master.commit({
+            dotSize: 10,
+            DotStrokeWidth: 10,
+            message: 'Here is a start',
+            author: 'Oscar Yin <oscaryin@objectivasoftware.com>',
+            tag: '1.0.0'
+        });
+        var hotfix1 = master.branch('hotfix1');
+        var release = develop.branch('release');
+        release.commit({
+            dotColor: 'green',
+            dotSize: 10,
+            DotStrokeWidth: 10,
+            message: 'Fix code',
+            author: 'Oscar Yin <oscaryin@objectivasoftware.com>'
+        });
+        hotfix1.commit({
+            dotColor: 'red',
+            dotSize: 10,
+            DotStrokeWidth: 10,
+            message: 'Fix code',
+            author: 'Oscar Yin <oscaryin@objectivasoftware.com>'
+        });
+        hotfix1.merge(master);
+
+    </script>
+</body>
+
+</html>
